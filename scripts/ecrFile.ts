@@ -1,7 +1,9 @@
 document
   .getElementById("fileInput")!
   .addEventListener("change", handleFileSelect);
-document.getElementById("downloadBtn")!.addEventListener("click", downloadCSV);
+document
+  .getElementById("downloadBtn")!
+  .addEventListener("click", downloadTextFile);
 document.getElementById("addRowBtn")!.addEventListener("click", addEmptyRow);
 
 const requiredColumns = [
@@ -40,13 +42,32 @@ function displayCSV(csv: string) {
   const table = document.getElementById("csvTable") as HTMLTableElement;
   table.innerHTML = "";
 
+  // Check if the first row contains the required columns
+  const firstRowCells = rows[0].split(",");
+  const isHeaderRow = requiredColumns.every((col) =>
+    firstRowCells.includes(col)
+  );
+
+  if (!isHeaderRow) {
+    // Add the required columns as the header row
+    const headerRow = document.createElement("tr");
+    requiredColumns.forEach((col) => {
+      const th = document.createElement("th");
+      th.textContent = col;
+      headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+  }
+
   rows.forEach((row, rowIndex) => {
     const tr = document.createElement("tr");
     const cells = row.split(",");
 
     cells.forEach((cell, cellIndex) => {
-      const td = document.createElement(rowIndex === 0 ? "th" : "td");
-      td.contentEditable = (rowIndex !== 0).toString();
+      const td = document.createElement(
+        isHeaderRow && rowIndex === 0 ? "th" : "td"
+      );
+      td.contentEditable = (!isHeaderRow || rowIndex !== 0).toString();
       td.textContent = cell.trim(); // Trim the cell content
       tr.appendChild(td);
     });
@@ -54,18 +75,20 @@ function displayCSV(csv: string) {
     table.appendChild(tr);
   });
 
-  // Ensure the required columns are present
-  const headerRow = table.rows[0];
-  const headers = Array.from(headerRow.cells).map((cell) =>
-    cell.textContent?.trim()
-  ); // Trim the header content
-  requiredColumns.forEach((col) => {
-    if (!headers.includes(col)) {
-      const th = document.createElement("th");
-      th.textContent = col;
-      headerRow.appendChild(th);
-    }
-  });
+  // Ensure the required columns are present if the header row was missing
+  if (!isHeaderRow) {
+    const headerRow = table.rows[0];
+    const headers = Array.from(headerRow.cells).map((cell) =>
+      cell.textContent?.trim()
+    ); // Trim the header content
+    requiredColumns.forEach((col) => {
+      if (!headers.includes(col)) {
+        const th = document.createElement("th");
+        th.textContent = col;
+        headerRow.appendChild(th);
+      }
+    });
+  }
 }
 
 function addEmptyRow() {
@@ -81,21 +104,26 @@ function addEmptyRow() {
   }
 }
 
-function downloadCSV() {
+function downloadTextFile() {
   const table = document.getElementById("csvTable") as HTMLTableElement;
   const rows = Array.from(table.rows);
-  const csv = rows
+  const text = rows
+    .slice(1) // Skip the title row
+    .filter((row) => {
+      const cells = Array.from(row.cells);
+      return cells.every((cell) => cell.textContent?.trim() !== "");
+    })
     .map((row) => {
       const cells = Array.from(row.cells);
-      return cells.map((cell) => cell.textContent).join(",");
+      return cells.map((cell) => cell.textContent).join("#~#");
     })
     .join("\n");
 
-  const blob = new Blob([csv], { type: "text/csv" });
+  const blob = new Blob([text], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "modified.csv";
+  a.download = "ecr.txt";
   a.click();
   URL.revokeObjectURL(url);
 }
