@@ -1,0 +1,98 @@
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  position: relative;
+}
+
+table,
+th,
+td {
+  border: 1px solid #e0e0e0;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label[for="fileInput"] {
+  padding: 8px 16px;
+  background-color: #4caf50; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px; /* Slightly smaller font size */
+}
+
+label[for="fileInput"]:hover {
+  background-color: #3700b3;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #4caf50; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px; /* Slightly smaller font size */
+}
+
+button:hover {
+  background-color: #3700b3;
+}
+
+.icon-btn {
+  background-color: #4caf50; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 8px 16px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px; /* Slightly smaller font size */
+  margin-bottom: 10px; /* Add some space below the button */
+}
+
+.icon-btn i {
+  margin-right: 5px; /* Add some space between the icon and text */
+}
+
+#addRowBtn {
+  position: absolute;
+  top: 10px; /* Adjust this value as needed */
+  right: 10px; /* Adjust this value as needed */
+}
+
+#downloadBtn {
+  background-color: #ff5722; /* Change to desired color */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}

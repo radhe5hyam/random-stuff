@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECR Challan Generation</title>
+    <link rel="stylesheet" href="./styles/ecrFile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>ECR Challan Generation</h1>
+      <table id="csvTable"></table>
+      <input type="file" id="fileInput" accept=".csv" />
+      <div class="button-container">
+        <label for="fileInput" class="icon-btn">Upload CSV</label>
+        <button id="downloadBtn" class="icon-btn" style="display: none">
+          Download CSV
+        </button>
+      </div>
+      <button id="addRowBtn" class="icon-btn" style="display: none">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    <script src="./scripts/ecrFile.js"></script>
+  </body>
+</html>

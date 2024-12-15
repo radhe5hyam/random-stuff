@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["es2016", "dom"],
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./public/scripts",
+    "rootDir": "scripts"
+  },
+  "include": ["scripts/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
