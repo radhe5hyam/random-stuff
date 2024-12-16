@@ -69,6 +69,15 @@ function displayCSV(csv: string) {
       );
       td.contentEditable = (!isHeaderRow || rowIndex !== 0).toString();
       td.textContent = cell.trim(); // Trim the cell content
+
+      // Add event listeners for EPF WAGES and EPS WAGES cells
+      if (
+        requiredColumns[cellIndex] === "EPF WAGES" ||
+        requiredColumns[cellIndex] === "EPS WAGES"
+      ) {
+        td.addEventListener("input", () => updateContributions(tr, cellIndex));
+      }
+
       tr.appendChild(td);
     });
 
@@ -91,6 +100,32 @@ function displayCSV(csv: string) {
   }
 }
 
+function updateContributions(row: HTMLTableRowElement, cellIndex: number) {
+  const cells = row.cells;
+  const epfWagesIndex = requiredColumns.indexOf("EPF WAGES");
+  const epsWagesIndex = requiredColumns.indexOf("EPS WAGES");
+  const epfContriIndex = requiredColumns.indexOf("EPF CONTRI REMITTED");
+  const epsContriIndex = requiredColumns.indexOf("EPS CONTRI REMITTED");
+  const epfEpsDiffIndex = requiredColumns.indexOf("EPF EPS DIFF REMITTED");
+
+  if (cellIndex === epfWagesIndex) {
+    const epfWages = parseFloat(cells[epfWagesIndex].textContent || "0");
+    const epfContri = Math.round(epfWages * 0.12);
+    cells[epfContriIndex].textContent = epfContri.toString();
+  }
+
+  if (cellIndex === epsWagesIndex) {
+    const epsWages = parseFloat(cells[epsWagesIndex].textContent || "0");
+    const epsContri = Math.round(epsWages * 0.0833);
+    cells[epsContriIndex].textContent = epsContri.toString();
+  }
+
+  const epfContri = parseFloat(cells[epfContriIndex].textContent || "0");
+  const epsContri = parseFloat(cells[epsContriIndex].textContent || "0");
+  const epfEpsDiff = Math.round(epfContri - epsContri);
+  cells[epfEpsDiffIndex].textContent = epfEpsDiff.toString();
+}
+
 function addEmptyRow() {
   const table = document.getElementById("csvTable") as HTMLTableElement;
   const newRow = table.insertRow();
@@ -101,6 +136,14 @@ function addEmptyRow() {
     const newCell = newRow.insertCell();
     newCell.contentEditable = "true";
     newCell.textContent = ""; // Empty cell
+
+    // Add event listeners for EPF WAGES and EPS WAGES cells
+    if (
+      requiredColumns[i] === "EPF WAGES" ||
+      requiredColumns[i] === "EPS WAGES"
+    ) {
+      newCell.addEventListener("input", () => updateContributions(newRow, i));
+    }
   }
 }
 
