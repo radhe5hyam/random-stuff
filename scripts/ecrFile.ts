@@ -40,62 +40,32 @@ function handleFileSelect(event: Event) {
 function displayCSV(csv: string) {
   const rows = csv.split("\n");
   const table = document.getElementById("csvTable") as HTMLTableElement;
+
+  // Clear existing table rows
   table.innerHTML = "";
 
-  // Check if the first row contains the required columns
-  const firstRowCells = rows[0].split(",");
-  const isHeaderRow = requiredColumns.every((col) =>
-    firstRowCells.includes(col)
+  // Check if the first row matches the required columns
+  const firstRow = rows[0].split(",").map((cell) => cell.trim());
+  const isHeaderPresent = requiredColumns.every(
+    (col, index) => col === firstRow[index]
   );
 
-  if (!isHeaderRow) {
-    // Add the required columns as the header row
-    const headerRow = document.createElement("tr");
+  // Add the header row to the table only if it is not present in the uploaded file
+  if (!isHeaderPresent) {
+    const headerRow = table.insertRow();
     requiredColumns.forEach((col) => {
-      const th = document.createElement("th");
-      th.textContent = col;
-      headerRow.appendChild(th);
+      const cell = headerRow.insertCell();
+      cell.textContent = col;
+      cell.style.fontWeight = "bold"; // Optional: make header bold
     });
-    table.appendChild(headerRow);
   }
 
-  rows.forEach((row, rowIndex) => {
-    const tr = document.createElement("tr");
-    const cells = row.split(",");
-
-    cells.forEach((cell, cellIndex) => {
-      const td = document.createElement(
-        isHeaderRow && rowIndex === 0 ? "th" : "td"
-      );
-      td.contentEditable = (!isHeaderRow || rowIndex !== 0).toString();
-      td.textContent = cell.trim(); // Trim the cell content
-
-      // Add event listeners for EPF WAGES and EPS WAGES cells
-      if (
-        requiredColumns[cellIndex] === "EPF WAGES" ||
-        requiredColumns[cellIndex] === "EPS WAGES"
-      ) {
-        td.addEventListener("input", () => updateContributions(tr, cellIndex));
-      }
-
-      tr.appendChild(td);
-    });
-
-    table.appendChild(tr);
-  });
-
-  // Ensure the required columns are present if the header row was missing
-  if (!isHeaderRow) {
-    const headerRow = table.rows[0];
-    const headers = Array.from(headerRow.cells).map((cell) =>
-      cell.textContent?.trim()
-    ); // Trim the header content
-    requiredColumns.forEach((col) => {
-      if (!headers.includes(col)) {
-        const th = document.createElement("th");
-        th.textContent = col;
-        headerRow.appendChild(th);
-      }
+  for (let i = 0; i < rows.length; i++) {
+    const row = table.insertRow();
+    const cells = rows[i].split(",").map((cell) => cell.trim());
+    cells.forEach((cell) => {
+      const cellElement = row.insertCell();
+      cellElement.textContent = cell;
     });
   }
 }
