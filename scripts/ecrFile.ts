@@ -50,22 +50,27 @@ function displayCSV(csv: string) {
     (col, index) => col === firstRow[index]
   );
 
-  // Add the header row to the table only if it is not present in the uploaded file
-  if (!isHeaderPresent) {
-    const headerRow = table.insertRow();
-    requiredColumns.forEach((col) => {
-      const cell = headerRow.insertCell();
-      cell.textContent = col;
-      cell.style.fontWeight = "bold"; // Optional: make header bold
-    });
-  }
+  // Add the header row to the table
+  const headerRow = table.insertRow();
+  requiredColumns.forEach((col) => {
+    const cell = headerRow.insertCell();
+    cell.textContent = col;
+    cell.style.fontWeight = "bold"; // Optional: make header bold
+  });
 
-  for (let i = 0; i < rows.length; i++) {
+  const startIndex = isHeaderPresent ? 1 : 0;
+  for (let i = startIndex; i < rows.length; i++) {
     const row = table.insertRow();
     const cells = rows[i].split(",").map((cell) => cell.trim());
-    cells.forEach((cell) => {
+    cells.forEach((cell, cellIndex) => {
       const cellElement = row.insertCell();
-      cellElement.textContent = cell;
+      if (i === 0 && isHeaderPresent) {
+        cellElement.textContent = cell;
+        cellElement.style.fontWeight = "bold"; // Optional: make header bold
+      } else {
+        cellElement.contentEditable = "true";
+        cellElement.innerText = cell;
+      }
     });
   }
 }

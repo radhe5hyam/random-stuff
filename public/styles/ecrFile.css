@@ -37,6 +37,16 @@ input[type="file"] {
   display: none;
 }
 
+input[type="text"] {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text color */
+  border: none; /* Hide border */
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
 label[for="fileInput"] {
   padding: 8px 16px;
   background-color: #4caf50; /* Green background */
