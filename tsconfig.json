@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ES5",
+    "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "lib": ["es2016", "dom"],
     "forceConsistentCasingInFileNames": true,
     "outDir": "./public/scripts",
-    "rootDir": "scripts"
+    "rootDir": "scripts",
+    "allowJs": true,
+    "moduleResolution": "node", // Ensure proper resolution of node modules
+    "types": ["xlsx"] // Include only the xlsx types
   },
-  "include": ["scripts/**/*.ts"],
+  "include": ["./scripts/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESI</title>
+    <link rel="stylesheet" href="./styles/esiFile.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="table-header">
+        <table id="xlsTable">
+          <thead>
+            <tr>
+              <th>IP Number (10 Digits)</th>
+              <th>IP Name (Only alphabets and space)</th>
+              <th>No of Days for which wages paid/payable during the month</th>
+              <th>Total Monthly Wages</th>
+              <th>
+                Reason Code for Zero workings days (numeric only; provide 0 for
+                all other reasons)
+              </th>
+              <th>Last Working Day (Format DD/MM/YYYY or DD-MM-YYYY)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows will be dynamically added -->
+          </tbody>
+        </table>
+        <button id="addRowButton" title="Add Row">+</button>
+      </div>
+      <button id="downloadButton">Download Modified File</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script type="module" src="../scripts/esiFile.js"></script>
+  </body>
+</html>

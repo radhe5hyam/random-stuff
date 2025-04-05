@@ -1,0 +1,126 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+input[type="file"] {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 5px;
+}
+
+input[type="date"] {
+  background-color: #2e2e2e;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 5px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #333333;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #1e1e1e;
+}
+
+td {
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+
+td input {
+  background-color: #2e2e2e;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 5px;
+  width: 100%;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #333333;
+}
+
+#addRowButton {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#addRowButton:hover {
+  background-color: #333333;
+}
+
+.table-header {
+  position: relative;
+}
+
+#addRowButton {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  background-color: #28a745; /* Green background */
+  color: #ffffff;
+  border: 1px solid #1e7e34; /* Darker green border */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#addRowButton:hover {
+  background-color: #218838; /* Darker green on hover */
+}

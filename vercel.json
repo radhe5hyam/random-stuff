@@ -2,8 +2,12 @@
   "version": 2,
   "routes": [
     {
-      "src": "/ecrFile",
+      "src": "/ecr",
       "dest": "/ecrFile.html"
+    },
+    {
+      "src": "/esi",
+      "dest": "/esiFile.html"
     },
     {
       "src": "/(.*)",
